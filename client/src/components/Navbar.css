@@ -1,0 +1,87 @@
+.navbar {
+  position: sticky;
+  top: 20px;
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+}
+
+.nav-content {
+  width: 95%;
+  max-width: 1100px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 14px 30px;
+
+  background: rgba(30, 31, 41, 0.6);
+  backdrop-filter: blur(12px);
+
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* LOGO */
+.logo {
+  font-weight: 600;
+  font-size: 20px;
+  background: linear-gradient(90deg, #a855f7, #6366f1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* LINKS */
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+}
+
+.nav-links li {
+  position: relative;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* HOVER ANIMADO */
+.nav-links li::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: linear-gradient(90deg, #a855f7, #6366f1);
+  transition: 0.3s;
+}
+
+.nav-links li:hover {
+  color: #f1f5f9;
+}
+
+.nav-links li:hover::after {
+  width: 100%;
+}
+
+/* BOTÓN */
+.btn-login {
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-login:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(168, 85, 247, 0.4);
+}
