@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { loginRequest } from "../services/authService";
 import LoginAlert from "../components/login/LoginAlert";
 import RolSelector from "../components/login/RolSelector";
 import "../components/login/Login.css";
@@ -50,22 +49,22 @@ const IconBack = () => (
 
 // ── Validación ──────────────────────────────────────
 function validate({ email, password }) {
-  const errors = {};
+  const formErrors = {};
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-    errors.email = "Ingresa un correo válido";
+    formErrors.email = "Ingresa un correo válido";
   if (!password)
-    errors.password = "Ingresa tu contraseña";
-  return errors;
+    formErrors.password = "Ingresa tu contraseña";
+  return formErrors;
 }
 
 // ── Componente principal ────────────────────────────
 export default function Login() {
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login } = useAuth(); // ✅ solo login, el contexto maneja todo internamente
 
   const [form, setForm] = useState({ email: "", password: "" });
   const [rol, setRol] = useState("empleado");
-  const [errors, setErrors] = useState({});
+  const [formErrors, setFormErrors] = useState({});
   const [showPwd, setShowPwd] = useState(false);
   const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState({ type: "", message: "" });
@@ -76,29 +75,25 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate(form);
-    setErrors(errs);
+    setFormErrors(errs);
     if (Object.keys(errs).length) return;
 
     setLoading(true);
     setAlert({ type: "", message: "" });
 
-    try {
-      const res = await loginRequest({ ...form, rol });
-      login(res.data.token);
+    const success = await login({ ...form, rol });
+
+    if (success) {
       setAlert({ type: "success", message: "¡Sesión iniciada correctamente! Redirigiendo..." });
-      setTimeout(() => navigate("/"), 1500);
-    } catch (err) {
-      const msg = err?.response?.status === 401
-        ? "Correo o contraseña incorrectos"
-        : err?.response?.data?.message || "Error al iniciar sesión. Intenta de nuevo.";
-      setAlert({ type: "error", message: msg });
-    } finally {
-      setLoading(false);
+      setTimeout(() => navigate("/dashboard"), 1500);
+    } else {
+      setAlert({ type: "error", message: "Correo, contraseña o rol incorrectos." });
     }
+
+    setLoading(false);
   };
-  const handleBack = () => {
-    navigate("/");
-  };
+
+  const handleBack = () => navigate("/");
 
   return (
     <div className="login-page">
@@ -130,11 +125,11 @@ export default function Login() {
                 id="email" type="email"
                 placeholder="juan@ejemplo.com"
                 value={form.email} onChange={set("email")}
-                className={`reg-input ${errors.email ? "error" : ""}`}
+                className={`reg-input ${formErrors.email ? "error" : ""}`}
               />
               <span className="reg-input-icon"><IconMail /></span>
             </div>
-            {errors.email && <span className="reg-error">{errors.email}</span>}
+            {formErrors.email && <span className="reg-error">{formErrors.email}</span>}
           </div>
 
           {/* Password */}
@@ -145,14 +140,14 @@ export default function Login() {
                 id="password" type={showPwd ? "text" : "password"}
                 placeholder="Tu contraseña"
                 value={form.password} onChange={set("password")}
-                className={`reg-input ${errors.password ? "error" : ""}`}
+                className={`reg-input ${formErrors.password ? "error" : ""}`}
               />
               <span className="reg-input-icon"><IconLock /></span>
               <button type="button" className="reg-eye" onClick={() => setShowPwd(!showPwd)}>
                 <IconEye open={showPwd} />
               </button>
             </div>
-            {errors.password && <span className="reg-error">{errors.password}</span>}
+            {formErrors.password && <span className="reg-error">{formErrors.password}</span>}
           </div>
 
           <div className="login-forgot">

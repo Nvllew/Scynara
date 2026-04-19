@@ -1,10 +1,10 @@
-import Navbar from "../components/Navbar/Navbar";
-import Hero from "../components/Hero/Hero";
-import Features from "../components/Features/Features";
-import HowItWorks from "../components/HowItWorks/HowItWorks";
-import Testimonials from "../components/Testimonials/Testimonials";
+import Navbar from "../components/home/Navbar/Navbar";
+import Hero from "../components/home/Hero/Hero";
+import Features from "../components/home/Features/Features";
+import HowItWorks from "../components/home/HowItWorks/HowItWorks";
+import Testimonials from "../components/home/Testimonials/Testimonials";
 // import CTA from "../components/CTA";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/home/Footer/Footer";
 
 export default function Home() {
 

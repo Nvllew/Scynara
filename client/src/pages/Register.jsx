@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { registerRequest } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
+
 import RegisterInput from "../components/Register/RegisterInput";
 import PasswordStrength from "../components/Register/PasswordStrength";
 import RegisterAlert from "../components/Register/RegisterAlert";
@@ -89,12 +91,16 @@ function validate(fields) {
 // ── Componente principal ────────────────────────────
 export default function Register() {
   const navigate = useNavigate();
-
+  const { register } = useAuth(); 
+  const [formErrors, setFormErrors] = useState({}); 
   const [form, setForm] = useState({
-    nombre: "", apellido: "", email: "",
-    telefono: "", rol: "", password: "", confirm: "",
+    nombre: "",
+    apellidos: "",   
+    telefono: "",
+    email: "",
+    password: "",
+    rol: "empleado"
   });
-  const [errors, setErrors] = useState({});
   const [showPwd, setShowPwd] = useState(false);
   const [showCfm, setShowCfm] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -106,7 +112,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errs = validate(form);
-    setErrors(errs);
+    setFormErrors(errs); 
     if (Object.keys(errs).length) return;
 
     setLoading(true);
@@ -115,7 +121,7 @@ export default function Register() {
     try {
       await registerRequest({
         nombre: form.nombre,
-        apellido: form.apellido,
+        apellidos: form.apellido,
         email: form.email,
         telefono: form.telefono,
         rol: form.rol,
@@ -129,6 +135,7 @@ export default function Register() {
       setLoading(false);
     }
   };
+
   const handleBack = () => {
     navigate("/");
   };
@@ -158,12 +165,12 @@ export default function Register() {
             <RegisterInput
               id="nombre" label="NOMBRE" placeholder="Juan"
               value={form.nombre} onChange={set("nombre")}
-              error={errors.nombre} icon={<IconUser />}
+              error={formErrors.nombre} icon={<IconUser />} 
             />
             <RegisterInput
               id="apellido" label="APELLIDO" placeholder="Pérez"
               value={form.apellido} onChange={set("apellido")}
-              error={errors.apellido} icon={<IconUser />}
+              error={formErrors.apellido} icon={<IconUser />}
             />
           </div>
 
@@ -172,7 +179,7 @@ export default function Register() {
             id="email" label="CORREO ELECTRÓNICO" type="email"
             placeholder="juan@ejemplo.com"
             value={form.email} onChange={set("email")}
-            error={errors.email} icon={<IconMail />}
+            error={formErrors.email} icon={<IconMail />}
           />
 
           {/* Teléfono */}
@@ -180,7 +187,7 @@ export default function Register() {
             id="telefono" label="TELÉFONO" type="tel"
             placeholder="55 1234 5678"
             value={form.telefono} onChange={set("telefono")}
-            error={errors.telefono} icon={<IconPhone />}
+            error={formErrors.telefono} icon={<IconPhone />}
           />
 
           {/* Rol */}
@@ -189,7 +196,7 @@ export default function Register() {
             <div className="reg-input-wrap">
               <select
                 id="rol"
-                className={`reg-select ${errors.rol ? "error" : ""}`}
+                className={`reg-select ${formErrors.rol ? "error" : ""}`}
                 value={form.rol}
                 onChange={set("rol")}
               >
@@ -199,7 +206,7 @@ export default function Register() {
               </select>
               <span className="reg-input-icon"><IconShield /></span>
             </div>
-            {errors.rol && <span className="reg-error">{errors.rol}</span>}
+            {formErrors.rol && <span className="reg-error">{formErrors.rol}</span>}
           </div>
 
           <div className="reg-divider" />
@@ -212,7 +219,7 @@ export default function Register() {
                 id="password" type={showPwd ? "text" : "password"}
                 placeholder="Mínimo 8 caracteres"
                 value={form.password} onChange={set("password")}
-                className={`reg-input ${errors.password ? "error" : ""}`}
+                className={`reg-input ${formErrors.password ? "error" : ""}`}
               />
               <span className="reg-input-icon"><IconLock /></span>
               <button type="button" className="reg-eye" onClick={() => setShowPwd(!showPwd)}>
@@ -220,7 +227,7 @@ export default function Register() {
               </button>
             </div>
             <PasswordStrength password={form.password} />
-            {errors.password && <span className="reg-error">{errors.password}</span>}
+            {formErrors.password && <span className="reg-error">{formErrors.password}</span>}
           </div>
 
           {/* Confirmar */}
@@ -231,14 +238,14 @@ export default function Register() {
                 id="confirm" type={showCfm ? "text" : "password"}
                 placeholder="Repite tu contraseña"
                 value={form.confirm} onChange={set("confirm")}
-                className={`reg-input ${errors.confirm ? "error" : ""}`}
+                className={`reg-input ${formErrors.confirm ? "error" : ""}`}
               />
               <span className="reg-input-icon"><IconLock /></span>
               <button type="button" className="reg-eye" onClick={() => setShowCfm(!showCfm)}>
                 <IconEye open={showCfm} />
               </button>
             </div>
-            {errors.confirm && <span className="reg-error">{errors.confirm}</span>}
+            {formErrors.confirm && <span className="reg-error">{formErrors.confirm}</span>}
           </div>
 
           <button type="submit" className="reg-submit" disabled={loading}>

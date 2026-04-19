@@ -1,5 +1,10 @@
-import express from 'express';
-import cors from 'cors';
+import express from "express";
+import cors from "cors";
+
+import productoRoutes from "./routes/producto.routes.js";
+import qrRoutes from "./routes/qr.routes.js";
+import authRoutes from './routes/auth.routes.js';
+import { errorHandler } from './middlewares/error.middleware.js';
 
 const app = express();
 
@@ -7,44 +12,16 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ruta de prueba
-app.get('/', (req, res) => {
-  res.send('API funcionando 🚀');
+// rutas
+app.get("/", (req, res) => {
+  res.send("API funcionando 🚀");
 });
 
-app.get("/productos", (req, res) => {
-    res.json([{ id: 1, nombre: "Producto de prueba" }]);
-  });
-  
-const productos = [
-  { codigo: "758104100422", nombre: "Bonafont", precio: 18, stock: 25 }
-];
+app.use("/productos", productoRoutes);
+app.use("/qr", qrRoutes);
 
-app.post("/api/qr", (req, res) => {
-  try {
-    const { qr } = req.body;
+app.use('/auth', authRoutes);
 
-    console.log("QR recibido:", qr);
-
-    const producto = productos.find(p => p.codigo === qr);
-
-    if (!producto) {
-      return res.status(404).json({
-        mensaje: "Producto no encontrado"
-      });
-    }
-
-    res.json({
-      mensaje: "Producto encontrado",
-      producto
-    });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      mensaje: "Error en el servidor"
-    });
-  }
-});
+app.use(errorHandler);
 
 export default app;

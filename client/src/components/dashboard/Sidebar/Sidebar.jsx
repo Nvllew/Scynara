@@ -1,0 +1,165 @@
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/AuthContext";
+
+/* ───────────── Iconos ───────────── */
+const IconGrid = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <rect x="3" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+    <rect x="14" y="14" width="7" height="7" rx="1" />
+  </svg>
+);
+
+const IconHome = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <polyline points="9 22 9 12 15 12 15 22" />
+  </svg>
+);
+
+const IconDollar = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <line x1="12" y1="1" x2="12" y2="23" />
+    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+  </svg>
+);
+
+const IconUsers = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+  </svg>
+);
+
+const IconTruck = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <rect x="1" y="3" width="15" height="13" rx="2" />
+    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+  </svg>
+);
+
+const IconChart = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <line x1="18" y1="20" x2="18" y2="10" />
+    <line x1="12" y1="20" x2="12" y2="4" />
+    <line x1="6" y1="20" x2="6" y2="14" />
+  </svg>
+);
+
+const IconUser = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <circle cx="12" cy="7" r="4" />
+    <path d="M5.5 21a6.5 6.5 0 0 1 13 0" />
+  </svg>
+);
+
+const IconSettings = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <circle cx="12" cy="12" r="3" />
+  </svg>
+);
+
+const IconLogout = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+    <polyline points="16 17 21 12 16 7" />
+    <line x1="21" y1="12" x2="9" y2="12" />
+  </svg>
+);
+
+/* ───────────── NAV ITEMS ───────────── */
+const NAV_ITEMS = [
+  {
+    section: "Principal",
+    items: [
+      { label: "Dashboard", path: "/", icon: IconGrid, roles: ["empleado", "admin"] },
+      { label: "Inventario", path: "/inventario", icon: IconHome, roles: ["empleado", "admin"], badge: "12" },
+      { label: "Ventas", path: "/ventas", icon: IconDollar, roles: ["empleado", "admin"] },
+      { label: "Clientes", path: "/clientes", icon: IconUsers, roles: ["empleado", "admin"] },
+    ],
+  },
+  {
+    section: "Gestión",
+    items: [
+      { label: "Proveedores", path: "/proveedores", icon: IconTruck, roles: ["empleado", "admin"] },
+      { label: "Reportes", path: "/reportes", icon: IconChart, roles: ["admin"] },
+    ],
+  },
+  {
+    section: "Administración",
+    items: [
+      { label: "Empleados", path: "/empleados", icon: IconUser, roles: ["admin"] },
+      { label: "Configuración", path: "/configuracion", icon: IconSettings, roles: ["admin"] },
+    ],
+  },
+];
+
+/* ───────────── COMPONENTE ───────────── */
+export default function Sidebar({ open, onClose }) {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
+
+  const initials = user?.nombre
+    ? user.nombre.slice(0, 1).toUpperCase()
+    : "U";
+
+  return (
+    <aside className={`sidebar ${open ? "open" : ""}`}>
+      <div className="sb-logo">SCYNARA</div>
+
+      {/* Usuario */}
+      <div className="sb-user">
+        <div className="sb-avatar">{initials}</div>
+        <div className="sb-user-info">
+          <p>{user?.nombre}</p>
+          <div className={`sb-rol ${user?.rol === "admin" ? "admin" : "empleado"}`}>
+            ● {user?.rol === "admin" ? "Administrador" : "Empleado"}
+          </div>
+        </div>
+      </div>
+
+      {/* Navegación */}
+      <nav className="sb-nav">
+        {NAV_ITEMS.map(({ section, items }) => (
+          <div key={section}>
+            <div className="sb-section">{section}</div>
+
+            {items.map((item) => {
+              const allowed = item.roles.includes(user?.rol);
+              const Icon = item.icon;
+
+              return (
+                <NavLink
+                  key={item.path}
+                  to={allowed ? item.path : "#"}
+                  onClick={allowed ? onClose : undefined}
+                  className={({ isActive }) =>
+                    `sb-item ${isActive && allowed ? "active" : ""} ${!allowed ? "disabled" : ""}`
+                  }
+                >
+                  <Icon />
+                  {item.label}
+                  {item.badge && <span className="sb-badge">{item.badge}</span>}
+                </NavLink>
+              );
+            })}
+          </div>
+        ))}
+      </nav>
+
+      {/* Footer */}
+      <div className="sb-footer">
+        <button className="sb-logout" onClick={handleLogout}>
+          <IconLogout />
+          Cerrar sesión
+        </button>
+      </div>
+    </aside>
+  );
+}

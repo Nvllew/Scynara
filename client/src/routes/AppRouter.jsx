@@ -5,8 +5,10 @@ import QRScanner from "../components/QRScanner/QRScanner";
 import { AuthProvider } from "../context/AuthContext";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import ProtectedRoute from "../routes/ProtectedRoute";
-import Navbar from "../components/Navbar/Navbar";
+import Dashboard from "../pages/Dashboard";
+import ProtectedRoute from "./ProtectedRoute";
+
+
 
 function AppRouter() {
   return (
@@ -17,9 +19,9 @@ function AppRouter() {
           <Route path="/productos" element={<Productos />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
-          <Route path="/qrscanner" element={<ProtectedRoute><QRScanner /></ProtectedRoute>} />
-
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>
