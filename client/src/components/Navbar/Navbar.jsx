@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 const links = [
@@ -6,11 +8,13 @@ const links = [
   { name: "Características", id: "Características" },
   { name: "¿Cómo funciona?", id: "¿Cómo funciona?" },
   { name: "Testimonios", id: "Testimonios" },
-];  
+];
 
 export default function Navbar() {
   const [active, setActive] = useState("Inicio");
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleScroll = (id, name) => {
     const section = document.getElementById(id);
@@ -21,11 +25,29 @@ export default function Navbar() {
     }
   };
 
+  const handleLogin = () => {
+    navigate("/login");
+    setMenuOpen(false);
+  };
+
+  const handleRegister = () => {
+    navigate("/register");
+    setMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+    setMenuOpen(false);
+  };
+
   return (
     <nav className="navbar">
       <div className="nav-content">
 
-        <h2 className="logo">SCYNARA</h2>
+        <h2 className="logo" onClick={() => navigate("/")}>
+          SCYNARA
+        </h2>
 
         {/* Links escritorio */}
         <ul className="nav-links">
@@ -41,8 +63,20 @@ export default function Navbar() {
         </ul>
 
         <div className="nav-right">
-          <button className="btn-login">Iniciar sesión</button>
-          <button className="btn-register">Registrarse</button>
+          {user ? (
+            <button className="btn-login" onClick={handleLogout}>
+              Cerrar sesión
+            </button>
+          ) : (
+            <>
+              <button className="btn-login" onClick={handleLogin}>
+                Iniciar sesión
+              </button>
+              <button className="btn-register" onClick={handleRegister}>
+                Registrarse
+              </button>
+            </>
+          )}
 
           {/* Hamburguesa */}
           <button
@@ -65,9 +99,32 @@ export default function Navbar() {
                 {link.name}
               </button>
             ))}
+
             <div className="mobile-divider" />
-            <button className="btn-login-mobile">Iniciar sesión</button>
-            <button className="btn-register-mobile">Registrarse</button>
+
+            {user ? (
+              <button
+                className="btn-login-mobile"
+                onClick={handleLogout}
+              >
+                Cerrar sesión
+              </button>
+            ) : (
+              <>
+                <button
+                  className="btn-login-mobile"
+                  onClick={handleLogin}
+                >
+                  Iniciar sesión
+                </button>
+                <button
+                  className="btn-register-mobile"
+                  onClick={handleRegister}
+                >
+                  Registrarse
+                </button>
+              </>
+            )}
           </div>
         )}
 

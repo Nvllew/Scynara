@@ -10,8 +10,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
-
       <section id="inicio">
         <Hero />
       </section>
