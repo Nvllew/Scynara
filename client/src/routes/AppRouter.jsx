@@ -12,13 +12,14 @@ function AppRouter() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/productos" element={<Productos />} />
-          <Route path="/qrscanner" element={<ProtectedRoute><QRScanner /></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          <Route path="/qrscanner" element={<ProtectedRoute><QRScanner /></ProtectedRoute>} />
+
         </Routes>
       </BrowserRouter>
     </AuthProvider>
