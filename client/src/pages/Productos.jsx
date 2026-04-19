@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { getProductos } from "../services/productosService";
+import QRScanner from "../components/QRScanner/QRScanner";
 
 function Productos() {
   useEffect(() => {
@@ -8,7 +9,12 @@ function Productos() {
       .catch(err => console.error(err));
   }, []);
 
-  return <h1>Productos 📦</h1>;
+  return (
+    <div>
+      <h1>Productos 📦</h1>
+      <QRScanner />
+    </div>
+  );
 }
 
 export default Productos;

@@ -1,0 +1,196 @@
+/* ─── BASE ─────────────────────────────────────────── */
+.features {
+  padding: 80px 48px;
+  background: #0a0c18;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── FONDO ─────────────────────────────────────────── */
+.features-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.features-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.features-blob--1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(139,92,246,0.1) 0%, transparent 70%);
+  top: -200px;
+  right: -150px;
+}
+
+.features-blob--2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+  bottom: -100px;
+  left: -100px;
+}
+
+/* ─── HEADER ─────────────────────────────────────────── */
+.features-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.features-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid rgba(139,92,246,0.28);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: #c4b5fd;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.features-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a78bfa;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.features-header h2 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.features-header h2 span {
+  color: #a78bfa;
+}
+
+.features-header p {
+  font-size: 16px;
+  color: #64748b;
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ─── GRID ─────────────────────────────────────────── */
+.features-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1060px;
+  margin: 0 auto;
+}
+
+/* ─── CARDS ─────────────────────────────────────────── */
+.feature-card {
+  background: rgba(22, 24, 38, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 28px;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.feature-card:hover {
+  border-color: rgba(139, 92, 246, 0.35);
+  transform: translateY(-4px);
+}
+
+.feature-card--featured {
+  background: rgba(109, 40, 217, 0.1);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* ─── ICON ─────────────────────────────────────────── */
+.feature-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.feature-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.icon-purple { background: rgba(139,92,246,0.18); }
+.icon-blue   { background: rgba(96,165,250,0.15); }
+.icon-green  { background: rgba(52,211,153,0.15); }
+.icon-amber  { background: rgba(251,191,36,0.15); }
+.icon-pink   { background: rgba(244,114,182,0.15); }
+.icon-teal   { background: rgba(45,212,191,0.15); }
+
+.feature-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.feature-card p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.feature-tag {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #a78bfa;
+  background: rgba(139,92,246,0.12);
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+
+/* ─── ANIMACIONES ─────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .features-header h2 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 580px) {
+  .features {
+    padding: 60px 24px;
+  }
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .features-header h2 {
+    font-size: 26px;
+  }
+}   

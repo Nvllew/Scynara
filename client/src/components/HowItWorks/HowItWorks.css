@@ -1,0 +1,218 @@
+/* ─── BASE ─────────────────────────────────────────── */
+.how {
+  padding: 80px 48px;
+  background: #0a0c18;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── FONDO ─────────────────────────────────────────── */
+.how-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+.how-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.how-blob--1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99,102,241,0.1) 0%, transparent 70%);
+  bottom: -150px;
+  right: -100px;
+}
+
+/* ─── HEADER ─────────────────────────────────────────── */
+.how-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.how-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139,92,246,0.12);
+  border: 1px solid rgba(139,92,246,0.28);
+  border-radius: 99px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: #c4b5fd;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.how-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #a78bfa;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.how-header h2 {
+  font-size: 38px;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.how-header h2 span {
+  color: #a78bfa;
+}
+
+.how-header p {
+  font-size: 16px;
+  color: #64748b;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ─── STEPS ─────────────────────────────────────────── */
+.how-steps {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.how-step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  align-items: stretch;
+}
+
+.step-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.step-num {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid rgba(139,92,246,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #a78bfa;
+  background: rgba(139,92,246,0.1);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.step-line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(to bottom, rgba(139,92,246,0.3), rgba(139,92,246,0.05));
+  margin: 8px 0;
+  min-height: 40px;
+}
+
+/* ─── CARD ─────────────────────────────────────────── */
+.step-body {
+  padding: 0 0 48px 24px;
+}
+
+.step-inner {
+  background: rgba(22,24,38,0.7);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 18px;
+  padding: 24px 28px;
+  transition: border-color 0.3s;
+}
+
+.step-inner:hover {
+  border-color: rgba(139,92,246,0.3);
+}
+
+.step-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11px;
+  color: #a78bfa;
+  font-weight: 500;
+  margin-bottom: 10px;
+  background: rgba(139,92,246,0.1);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+.step-inner h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.step-inner p {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+.step-details {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.step-detail {
+  font-size: 12px;
+  color: #94a3b8;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  padding: 5px 12px;
+}
+
+/* ─── ANIMACIONES ─────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.85); }
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .how {
+    padding: 60px 20px;
+  }
+
+  .how-header h2 {
+    font-size: 26px;
+  }
+
+  .how-step {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .step-body {
+    padding: 0 0 36px 16px;
+  }
+
+  .step-inner {
+    padding: 18px 20px;
+  }
+}
