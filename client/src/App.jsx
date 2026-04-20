@@ -1,7 +1,15 @@
 import AppRouter from "./routes/AppRouter";
+import { ThemeProvider } from "./context/ThemeContext";
+import { AuthProvider } from "./context/AuthContext";
 
 function App() {
-  return <AppRouter />;
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;

@@ -1,16 +1,82 @@
-/* ─── BASE ─────────────────────────────────────────── */
+/* =========================
+   VARIABLES (DEFAULT = 🌙 OSCURO)
+========================= */
+
+:root {
+  --how-bg: #0a0c18;
+  --how-text: #f8fafc;
+  --how-text-soft: #64748b;
+  --how-text-strong: #f1f5f9;
+
+  --how-accent: #a78bfa;
+  --how-accent-soft: #c4b5fd;
+
+  --how-badge-bg: rgba(139,92,246,0.12);
+  --how-badge-border: rgba(139,92,246,0.28);
+
+  --how-card-bg: rgba(22,24,38,0.7);
+  --how-card-border: rgba(255,255,255,0.06);
+  --how-card-hover: rgba(139,92,246,0.3);
+
+  --how-step-bg: rgba(255,255,255,0.04);
+  --how-step-border: rgba(255,255,255,0.07);
+
+  --how-line: rgba(139,92,246,0.3);
+  --how-line-soft: rgba(139,92,246,0.05);
+
+  --how-grid-dot: rgba(255,255,255,0.04);
+}
+
+/* =========================
+   🌞 MODO CLARO
+========================= */
+
+[data-theme="light"] {
+  --how-bg: #ffffff;
+  --how-text: #0f172a;
+  --how-text-soft: #64748b;
+  --how-text-strong: #0f172a;
+
+  --how-accent: #7c3aed;
+  --how-accent-soft: #a78bfa;
+
+  --how-badge-bg: rgba(124,58,237,0.12);
+  --how-badge-border: rgba(124,58,237,0.25);
+
+  --how-card-bg: rgba(255,255,255,0.7);
+  --how-card-border: rgba(0,0,0,0.06);
+  --how-card-hover: rgba(124,58,237,0.3);
+
+  --how-step-bg: rgba(0,0,0,0.03);
+  --how-step-border: rgba(0,0,0,0.08);
+
+  --how-line: rgba(124,58,237,0.3);
+  --how-line-soft: rgba(124,58,237,0.05);
+
+  --how-grid-dot: rgba(0,0,0,0.04);
+}
+
+
+/* =========================
+   BASE
+========================= */
+
 .how {
   padding: 80px 48px;
-  background: #0a0c18;
+  background: var(--how-bg);
   position: relative;
   overflow: hidden;
 }
 
-/* ─── FONDO ─────────────────────────────────────────── */
+
+/* =========================
+   BACKGROUND
+========================= */
+
 .how-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--how-grid-dot) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;
 }
@@ -29,7 +95,11 @@
   right: -100px;
 }
 
-/* ─── HEADER ─────────────────────────────────────────── */
+
+/* =========================
+   HEADER
+========================= */
+
 .how-header {
   position: relative;
   z-index: 2;
@@ -41,12 +111,12 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(139,92,246,0.12);
-  border: 1px solid rgba(139,92,246,0.28);
+  background: var(--how-badge-bg);
+  border: 1px solid var(--how-badge-border);
   border-radius: 99px;
   padding: 5px 14px;
   font-size: 12px;
-  color: #c4b5fd;
+  color: var(--how-accent-soft);
   font-weight: 500;
   letter-spacing: 0.04em;
   margin-bottom: 20px;
@@ -56,32 +126,36 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #a78bfa;
+  background: var(--how-accent);
   animation: pulse 2s ease-in-out infinite;
 }
 
 .how-header h2 {
   font-size: 38px;
   font-weight: 800;
-  color: #f8fafc;
+  color: var(--how-text);
   line-height: 1.1;
   letter-spacing: -0.02em;
   margin-bottom: 14px;
 }
 
 .how-header h2 span {
-  color: #a78bfa;
+  color: var(--how-accent);
 }
 
 .how-header p {
   font-size: 16px;
-  color: #64748b;
+  color: var(--how-text-soft);
   max-width: 480px;
   margin: 0 auto;
   line-height: 1.65;
 }
 
-/* ─── STEPS ─────────────────────────────────────────── */
+
+/* =========================
+   STEPS
+========================= */
+
 .how-steps {
   position: relative;
   z-index: 2;
@@ -108,14 +182,14 @@
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  border: 2px solid rgba(139,92,246,0.4);
+  border: 2px solid var(--how-line);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 14px;
   font-weight: 700;
-  color: #a78bfa;
-  background: rgba(139,92,246,0.1);
+  color: var(--how-accent);
+  background: var(--how-badge-bg);
   flex-shrink: 0;
   z-index: 1;
 }
@@ -123,36 +197,40 @@
 .step-line {
   width: 2px;
   flex: 1;
-  background: linear-gradient(to bottom, rgba(139,92,246,0.3), rgba(139,92,246,0.05));
+  background: linear-gradient(to bottom, var(--how-line), var(--how-line-soft));
   margin: 8px 0;
   min-height: 40px;
 }
 
-/* ─── CARD ─────────────────────────────────────────── */
+
+/* =========================
+   CARD
+========================= */
+
 .step-body {
   padding: 0 0 48px 24px;
 }
 
 .step-inner {
-  background: rgba(22,24,38,0.7);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: var(--how-card-bg);
+  border: 1px solid var(--how-card-border);
   border-radius: 18px;
   padding: 24px 28px;
   transition: border-color 0.3s;
 }
 
 .step-inner:hover {
-  border-color: rgba(139,92,246,0.3);
+  border-color: var(--how-card-hover);
 }
 
 .step-tag {
   display: inline-flex;
   align-items: center;
   font-size: 11px;
-  color: #a78bfa;
+  color: var(--how-accent);
   font-weight: 500;
   margin-bottom: 10px;
-  background: rgba(139,92,246,0.1);
+  background: var(--how-badge-bg);
   padding: 3px 10px;
   border-radius: 6px;
 }
@@ -160,14 +238,14 @@
 .step-inner h3 {
   font-size: 17px;
   font-weight: 700;
-  color: #f1f5f9;
+  color: var(--how-text-strong);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
 }
 
 .step-inner p {
   font-size: 13px;
-  color: #64748b;
+  color: var(--how-text-soft);
   line-height: 1.65;
   max-width: 560px;
 }
@@ -181,20 +259,28 @@
 
 .step-detail {
   font-size: 12px;
-  color: #94a3b8;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
+  color: var(--how-text-soft);
+  background: var(--how-step-bg);
+  border: 1px solid var(--how-step-border);
   border-radius: 8px;
   padding: 5px 12px;
 }
 
-/* ─── ANIMACIONES ─────────────────────────────────────────── */
+
+/* =========================
+   ANIMATIONS
+========================= */
+
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.6; transform: scale(0.85); }
+  50% { opacity: 0.6; transform: scale(0.85); }
 }
 
-/* ─── RESPONSIVE ─────────────────────────────────────────── */
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 600px) {
   .how {
     padding: 60px 20px;

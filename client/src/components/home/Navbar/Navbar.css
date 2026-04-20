@@ -1,3 +1,60 @@
+/* =========================
+   VARIABLES NAVBAR
+   (DEFAULT = 🌙 OSCURO)
+========================= */
+
+:root {
+  --nav-bg: rgba(20, 22, 34, 0.75);
+  --nav-bg-strong: rgba(20, 22, 34, 0.97);
+
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --nav-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --nav-shadow-strong: 0 16px 40px rgba(0, 0, 0, 0.6);
+
+  --text-h: #f1f5f9;
+  --text-muted: #9ca3af;
+
+  --hover-bg: rgba(255, 255, 255, 0.06);
+
+  --accent: #c084fc;
+  --accent-bg: rgba(168, 85, 247, 0.12);
+
+  --border: rgba(255, 255, 255, 0.06);
+
+  --btn-shadow: 0 8px 20px rgba(168, 85, 247, 0.45);
+}
+
+
+/* =========================
+   🌞 MODO CLARO
+========================= */
+
+[data-theme="light"] {
+  --nav-bg: rgba(255, 255, 255, 0.75);
+  --nav-bg-strong: rgba(255, 255, 255, 0.95);
+
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --nav-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --nav-shadow-strong: 0 16px 40px rgba(0, 0, 0, 0.15);
+
+  --text-h: #0f172a;
+  --text-muted: #64748b;
+
+  --hover-bg: rgba(0, 0, 0, 0.05);
+
+  --accent: #7c3aed;
+  --accent-bg: rgba(124, 58, 237, 0.12);
+
+  --border: rgba(0, 0, 0, 0.06);
+
+  --btn-shadow: 0 8px 20px rgba(124, 58, 237, 0.25);
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
 .navbar {
   position: sticky;
   top: 16px;
@@ -15,14 +72,18 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 24px;
-  background: rgba(20, 22, 34, 0.75);
+  background: var(--nav-bg);
   backdrop-filter: blur(16px);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--nav-border);
+  box-shadow: var(--nav-shadow);
 }
 
-/* Logo */
+
+/* =========================
+   LOGO
+========================= */
+
 .logo {
   font-size: 18px;
   font-weight: 700;
@@ -33,7 +94,11 @@
   background-clip: text;
 }
 
-/* Links escritorio */
+
+/* =========================
+   LINKS
+========================= */
+
 .nav-links {
   display: flex;
   gap: 4px;
@@ -42,7 +107,7 @@
 
 .nav-links li {
   position: relative;
-  color: #9ca3af;
+  color: var(--text-muted);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -52,23 +117,31 @@
 }
 
 .nav-links li:hover {
-  color: #f1f5f9;
-  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-h);
+  background: var(--hover-bg);
 }
 
 .nav-links li.active {
-  color: #c084fc;
-  background: rgba(168, 85, 247, 0.12);
+  color: var(--accent);
+  background: var(--accent-bg);
 }
 
-/* Derecha */
+
+/* =========================
+   RIGHT
+========================= */
+
 .nav-right {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* Botón login */
+
+/* =========================
+   BUTTONS
+========================= */
+
 .btn-login,
 .btn-register {
   background: linear-gradient(135deg, #a855f7, #6366f1);
@@ -82,18 +155,17 @@
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-login:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.45);
-}
-
+.btn-login:hover,
 .btn-register:hover {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(168, 85, 247, 0.45);
+  box-shadow: var(--btn-shadow);
 }
 
 
-/* Hamburguesa */
+/* =========================
+   HAMBURGER
+========================= */
+
 .hamburger {
   display: none;
   flex-direction: column;
@@ -108,7 +180,7 @@
   display: block;
   width: 22px;
   height: 2px;
-  background: #9ca3af;
+  background: var(--text-muted);
   border-radius: 2px;
   transition: all 0.3s;
   transform-origin: center;
@@ -116,36 +188,43 @@
 
 .hamburger.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
-  background: #c084fc;
+  background: var(--accent);
 }
+
 .hamburger.open span:nth-child(2) {
   opacity: 0;
   transform: scaleX(0);
 }
+
 .hamburger.open span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
-  background: #c084fc;
+  background: var(--accent);
 }
 
-/* Menú móvil */
+
+/* =========================
+   MOBILE MENU
+========================= */
+
 .mobile-menu {
   position: absolute;
   top: calc(100% + 10px);
   left: 0;
   right: 0;
-  background: rgba(20, 22, 34, 0.97);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--nav-bg-strong);
+  border: 1px solid var(--nav-border);
   border-radius: 14px;
   padding: 8px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: var(--nav-shadow-strong);
   backdrop-filter: blur(16px);
+  
 }
 
 .mobile-link {
   display: block;
   width: 100%;
   text-align: left;
-  color: #9ca3af;
+  color: var(--text-muted);
   font-size: 15px;
   font-weight: 500;
   padding: 12px 16px;
@@ -156,16 +235,23 @@
   transition: color 0.2s, background 0.2s;
 }
 
-.mobile-link:hover { color: #f1f5f9; background: rgba(255,255,255,0.06); }
-.mobile-link.active { color: #c084fc; background: rgba(168,85,247,0.12); }
+.mobile-link:hover {
+  color: var(--text-h);
+  background: var(--hover-bg);
+}
+
+.mobile-link.active {
+  color: var(--accent);
+  background: var(--accent-bg);
+}
 
 .mobile-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--border);
   margin: 6px 0;
 }
 
-.btn-login-mobile, 
+.btn-login-mobile,
 .btn-register-mobile {
   width: 100%;
   background: linear-gradient(135deg, #a855f7, #6366f1);
@@ -179,10 +265,23 @@
 }
 
 
-/* Responsive */
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 640px) {
   .nav-links,
   .btn-login,
-  .btn-register { display: none; }
-  .hamburger { display: flex; }
+  .btn-register {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+  .mobile-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* ← AQUÍ está la separación */
+  }
 }

@@ -72,7 +72,7 @@ export const registerUser = async (data) => {
     throw err;
   }
 
-  if (!['admin', 'empleado'].includes(rol)) {
+  if (!['administrador', 'empleado'].includes(rol)) {
     const err = new Error('Rol inválido');
     err.status = 400;
     throw err;

@@ -1,7 +1,63 @@
-/* ─── PAGE ─────────────────────────────────────────── */
+/* =========================
+   VARIABLES (DEFAULT = 🌙 OSCURO)
+========================= */
+
+:root {
+  --reg-bg: #0a0c18;
+
+  --reg-card-bg: rgba(18, 20, 32, 0.9);
+  --reg-card-border: rgba(255, 255, 255, 0.07);
+
+  --reg-text: #f8fafc;
+  --reg-text-soft: #64748b;
+  --reg-text-muted: #475569;
+  --reg-text-strong: #f1f5f9;
+
+  --reg-accent: #a78bfa;
+  --reg-accent-strong: #7c3aed;
+
+  --reg-input-bg: rgba(255, 255, 255, 0.04);
+  --reg-input-border: rgba(255, 255, 255, 0.08);
+  --reg-input-focus: rgba(139, 92, 246, 0.5);
+
+  --reg-divider: rgba(255, 255, 255, 0.06);
+  --reg-grid-dot: rgba(255, 255, 255, 0.04);
+}
+
+/* =========================
+   🌞 MODO CLARO
+========================= */
+
+[data-theme="light"] {
+  --reg-bg: #ffffff;
+
+  --reg-card-bg: rgba(255, 255, 255, 0.9);
+  --reg-card-border: rgba(0, 0, 0, 0.08);
+
+  --reg-text: #0f172a;
+  --reg-text-soft: #64748b;
+  --reg-text-muted: #475569;
+  --reg-text-strong: #0f172a;
+
+  --reg-accent: #7c3aed;
+  --reg-accent-strong: #6d28d9;
+
+  --reg-input-bg: rgba(0, 0, 0, 0.03);
+  --reg-input-border: rgba(0, 0, 0, 0.08);
+  --reg-input-focus: rgba(124, 58, 237, 0.5);
+
+  --reg-divider: rgba(0, 0, 0, 0.06);
+  --reg-grid-dot: rgba(0, 0, 0, 0.04);
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
 .register-page {
   min-height: 100vh;
-  background: #0a0c18;
+  background: var(--reg-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,8 +70,8 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background: white;
-  border: none;
+  background: var(--reg-card-bg);
+  border: 1px solid var(--reg-card-border);
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -23,20 +79,22 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
 }
 
 .back-button:hover {
   transform: scale(1.05);
-  background: #f5f5f5;
 }
 
-/* ─── FONDO ─────────────────────────────────────────── */
+
+/* =========================
+   BACKGROUND
+========================= */
+
 .reg-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-image: radial-gradient(circle, var(--reg-grid-dot) 1px, transparent 1px);
   background-size: 28px 28px;
   pointer-events: none;
 }
@@ -63,14 +121,18 @@
   right: -150px;
 }
 
-/* ─── CARD ─────────────────────────────────────────── */
+
+/* =========================
+   CARD
+========================= */
+
 .register-card {
   position: relative;
   z-index: 2;
   width: 100%;
   max-width: 460px;
-  background: rgba(18, 20, 32, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--reg-card-bg);
+  border: 1px solid var(--reg-card-border);
   border-radius: 24px;
   padding: 40px;
   backdrop-filter: blur(12px);
@@ -94,18 +156,17 @@
 .reg-header h2 {
   font-size: 24px;
   font-weight: 800;
-  color: #f8fafc;
-  letter-spacing: -0.02em;
+  color: var(--reg-text);
   margin-bottom: 6px;
 }
 
 .reg-header p {
   font-size: 14px;
-  color: #64748b;
+  color: var(--reg-text-soft);
 }
 
 .reg-header p a {
-  color: #a78bfa;
+  color: var(--reg-accent);
   text-decoration: none;
 }
 
@@ -113,7 +174,11 @@
   text-decoration: underline;
 }
 
-/* ─── ALERT ─────────────────────────────────────────── */
+
+/* =========================
+   ALERT
+========================= */
+
 .reg-alert {
   display: flex;
   align-items: center;
@@ -136,7 +201,11 @@
   color: #6ee7b7;
 }
 
-/* ─── LAYOUT ─────────────────────────────────────────── */
+
+/* =========================
+   LAYOUT
+========================= */
+
 .reg-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -153,11 +222,14 @@
 .reg-field label {
   font-size: 12px;
   font-weight: 600;
-  color: #94a3b8;
-  letter-spacing: 0.04em;
+  color: var(--reg-text-soft);
 }
 
-/* ─── INPUTS ─────────────────────────────────────────── */
+
+/* =========================
+   INPUTS
+========================= */
+
 .reg-input-wrap {
   position: relative;
   display: flex;
@@ -167,23 +239,22 @@
 .reg-input,
 .reg-select {
   width: 100%;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--reg-input-bg);
+  border: 1px solid var(--reg-input-border);
   border-radius: 10px;
   padding: 11px 14px 11px 40px;
   font-size: 14px;
-  color: #f1f5f9;
+  color: var(--reg-text-strong);
   outline: none;
-  transition: border-color 0.2s, background 0.2s;
 }
 
 .reg-input::placeholder {
-  color: #475569;
+  color: var(--reg-text-muted);
 }
 
 .reg-input:focus,
 .reg-select:focus {
-  border-color: rgba(139, 92, 246, 0.5);
+  border-color: var(--reg-input-focus);
   background: rgba(139, 92, 246, 0.05);
 }
 
@@ -198,22 +269,18 @@
 }
 
 .reg-select option {
-  background: #1a1c2e;
-  color: #f1f5f9;
+  background: var(--reg-card-bg);
+  color: var(--reg-text);
 }
 
 .reg-input-icon {
   position: absolute;
   left: 12px;
-  display: flex;
-  align-items: center;
-  pointer-events: none;
-  color: #475569;
-  transition: color 0.2s;
+  color: var(--reg-text-muted);
 }
 
 .reg-input-wrap:focus-within .reg-input-icon {
-  color: #a78bfa;
+  color: var(--reg-accent);
 }
 
 .reg-eye {
@@ -221,16 +288,12 @@
   right: 12px;
   background: none;
   border: none;
-  padding: 0;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  color: #475569;
-  transition: color 0.2s;
+  color: var(--reg-text-muted);
 }
 
 .reg-eye:hover {
-  color: #a78bfa;
+  color: var(--reg-accent);
 }
 
 .reg-error {
@@ -238,18 +301,25 @@
   color: #f87171;
 }
 
-/* ─── SEPARADOR ─────────────────────────────────────────── */
+
+/* =========================
+   DIVIDER
+========================= */
+
 .reg-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--reg-divider);
   margin: 4px 0 20px;
 }
 
-/* ─── STRENGTH ─────────────────────────────────────────── */
+
+/* =========================
+   STRENGTH
+========================= */
+
 .reg-strength-bar {
   display: flex;
   gap: 4px;
-  margin-bottom: 4px;
   margin-top: 8px;
 }
 
@@ -257,8 +327,7 @@
   height: 3px;
   flex: 1;
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.08);
-  transition: background 0.3s;
+  background: var(--reg-input-border);
 }
 
 .reg-strength-seg.weak {
@@ -274,18 +343,22 @@
 }
 
 .reg-strength-seg.strong {
-  background: #a78bfa;
+  background: var(--reg-accent);
 }
 
 .reg-strength-label {
   font-size: 11px;
-  color: #64748b;
+  color: var(--reg-text-soft);
 }
 
-/* ─── SUBMIT ─────────────────────────────────────────── */
+
+/* =========================
+   SUBMIT
+========================= */
+
 .reg-submit {
   width: 100%;
-  background: #7c3aed;
+  background: var(--reg-accent-strong);
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -293,59 +366,40 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
   margin-top: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
 }
 
 .reg-submit:hover:not(:disabled) {
-  background: #6d28d9;
+  filter: brightness(0.9);
   transform: translateY(-1px);
 }
 
 .reg-submit:disabled {
   opacity: 0.6;
-  cursor: not-allowed;
 }
 
-.reg-spinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #fff;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  flex-shrink: 0;
-}
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* =========================
+   TERMS
+========================= */
 
-/* ─── TERMS ─────────────────────────────────────────── */
 .reg-terms {
   font-size: 11px;
-  color: #475569;
+  color: var(--reg-text-muted);
   text-align: center;
   margin-top: 14px;
-  line-height: 1.6;
 }
 
 .reg-terms a {
-  color: #a78bfa;
+  color: var(--reg-accent);
   text-decoration: none;
 }
 
-.reg-terms a:hover {
-  text-decoration: underline;
-}
 
-/* ─── RESPONSIVE ─────────────────────────────────────────── */
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 480px) {
   .register-card {
     padding: 28px 22px;
@@ -356,24 +410,11 @@
   }
 
   .back-button {
-    display: flex;
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: white;
-    border: none;
-    border-radius: 50%;
+    top: 12px;
+    left: 12px;
     width: 38px;
     height: 38px;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-    transition: all 0.2s ease;
-  }
-
-  .back-button:hover {
-    transform: scale(1.05);
+    position: fixed;
+    z-index: 9999;
   }
 }

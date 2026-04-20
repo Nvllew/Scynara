@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import Sidebar    from "../components/dashboard/Sidebar/Sidebar";
-import StatCards  from "../components/dashboard/StatCards/StatCards";
+
+import Sidebar from "../components/dashboard/Sidebar/Sidebar";
+import StatCards from "../components/dashboard/StatCards/StatCards";
 import ModuleCards from "../components/dashboard/ModuleCards/ModuleCards";
 import RecentSales from "../components/dashboard/RecentSales/RecentSales";
 import AlertsPanel from "../components/dashboard/AlertsPanel/AlertsPanel";
+import SettingsModal from "../components/dashboard/SettingsModal/SettingsModal";
+
 import "../components/dashboard/Dashboard.css";
 
+/* ───────────── ICONOS ───────────── */
 const IconBell = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"
     strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
@@ -24,6 +28,15 @@ const IconMenu = () => (
   </svg>
 );
 
+const IconSettings = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"
+    strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+    <circle cx="12" cy="12" r="3" />
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0A1.65 1.65 0 0 0 10.91 3H11a2 2 0 1 1 4 0h-.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0A1.65 1.65 0 0 0 21 10.91V11a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </svg>
+);
+
+/* ───────────── HELPERS ───────────── */
 function getGreeting() {
   const h = new Date().getHours();
   if (h < 12) return "Buenos días";
@@ -33,28 +46,39 @@ function getGreeting() {
 
 function formatDate() {
   return new Date().toLocaleDateString("es-MX", {
-    weekday: "long", year: "numeric",
-    month: "long",   day: "numeric",
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
 }
 
+/* ───────────── COMPONENTE ───────────── */
 export default function Dashboard() {
   const { user } = useAuth();
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openSettings, setOpenSettings] = useState(false);
 
   return (
     <div className="dash">
-      {/* Overlay móvil */}
+
+      {/* Overlay móvil sidebar */}
       {sidebarOpen && (
         <div className="sb-overlay" onClick={() => setSidebarOpen(false)} />
       )}
 
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {/* Sidebar */}
+      <Sidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
 
       <main className="dash-main">
 
-        {/* Topbar */}
+        {/* ───────────── TOPBAR ───────────── */}
         <div className="dash-topbar">
+
           <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
             <button
               className="sb-menu-btn"
@@ -63,21 +87,38 @@ export default function Dashboard() {
             >
               <IconMenu />
             </button>
+
             <div className="dash-greeting">
-              <h1>{getGreeting()}, <span>{user?.nombre}</span> 👋</h1>
+              <h1>
+                {getGreeting()}, <span>{user?.nombre}</span> 👋
+              </h1>
+
               <p style={{ textTransform: "capitalize" }}>
                 {formatDate()} · {user?.rol}
               </p>
             </div>
           </div>
+
           <div className="dash-topbar-right">
+
+            {/* Notificaciones */}
             <div className="dash-notif">
               <IconBell />
               <span className="notif-dot" />
             </div>
+
+            {/* Botón configuración */}
+            <button
+              className="settings-btn"
+              onClick={() => setOpenSettings(true)}
+            >
+              <IconSettings />
+            </button>
+
           </div>
         </div>
 
+        {/* ───────────── CONTENIDO ───────────── */}
         <StatCards />
         <ModuleCards />
 
@@ -87,6 +128,13 @@ export default function Dashboard() {
         </div>
 
       </main>
+
+      {/* ───────────── MODAL CONFIGURACIÓN ───────────── */}
+      <SettingsModal
+        open={openSettings}
+        onClose={() => setOpenSettings(false)}
+      />
+
     </div>
   );
 }

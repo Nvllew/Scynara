@@ -73,24 +73,23 @@ const NAV_ITEMS = [
   {
     section: "Principal",
     items: [
-      { label: "Dashboard", path: "/", icon: IconGrid, roles: ["empleado", "admin"] },
-      { label: "Inventario", path: "/inventario", icon: IconHome, roles: ["empleado", "admin"], badge: "12" },
-      { label: "Ventas", path: "/ventas", icon: IconDollar, roles: ["empleado", "admin"] },
-      { label: "Clientes", path: "/clientes", icon: IconUsers, roles: ["empleado", "admin"] },
+      { label: "Dashboard", path: "/", icon: IconGrid, roles: ["empleado", "administrador"] },
+      { label: "Inventario", path: "/inventario", icon: IconHome, roles: ["empleado", "administrador"], badge: "12" },
+      { label: "Ventas", path: "/ventas", icon: IconDollar, roles: ["empleado", "administrador"] },
+      { label: "Clientes", path: "/clientes", icon: IconUsers, roles: ["empleado", "administrador"] },
     ],
   },
   {
     section: "Gestión",
     items: [
-      { label: "Proveedores", path: "/proveedores", icon: IconTruck, roles: ["empleado", "admin"] },
-      { label: "Reportes", path: "/reportes", icon: IconChart, roles: ["admin"] },
+      { label: "Proveedores", path: "/proveedores", icon: IconTruck, roles: ["empleado", "administrador"] },
+      { label: "Reportes", path: "/reportes", icon: IconChart, roles: ["administrador"] },
     ],
   },
   {
     section: "Administración",
     items: [
-      { label: "Empleados", path: "/empleados", icon: IconUser, roles: ["admin"] },
-      { label: "Configuración", path: "/configuracion", icon: IconSettings, roles: ["admin"] },
+      { label: "Empleados", path: "/empleados", icon: IconUser, roles: ["administrador"] },
     ],
   },
 ];
@@ -118,8 +117,8 @@ export default function Sidebar({ open, onClose }) {
         <div className="sb-avatar">{initials}</div>
         <div className="sb-user-info">
           <p>{user?.nombre}</p>
-          <div className={`sb-rol ${user?.rol === "admin" ? "admin" : "empleado"}`}>
-            ● {user?.rol === "admin" ? "Administrador" : "Empleado"}
+          <div className={`sb-rol ${user?.rol === "administrador" ? "administrador" : "empleado"}`}>
+            ● {user?.rol === "administrador" ? "Administrador" : "Empleado"}
           </div>
         </div>
       </div>
