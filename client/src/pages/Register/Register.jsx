@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { registerRequest } from "../services/authService";
-import { useAuth } from "../context/AuthContext";
+import { registerRequest } from "../../services/authService";
+import { useAuth } from "../../context/AuthContext";
 
-import RegisterInput from "../components/Register/RegisterInput";
-import PasswordStrength from "../components/Register/PasswordStrength";
-import RegisterAlert from "../components/Register/RegisterAlert";
-import "../components/Register/Register.css";
+import RegisterInput from "../../components/Register/RegisterInput";
+import PasswordStrength from "../../components/Register/PasswordStrength";
+import RegisterAlert from "../../components/Register/RegisterAlert";
+import "./Register.css";
 
 // ── Iconos ──────────────────────────────────────────
 const IconBack = () => (

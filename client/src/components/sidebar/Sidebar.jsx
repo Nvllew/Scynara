@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 /* ───────────── Iconos ───────────── */
 const IconGrid = () => (
@@ -73,23 +73,23 @@ const NAV_ITEMS = [
   {
     section: "Principal",
     items: [
-      { label: "Dashboard", path: "/", icon: IconGrid, roles: ["empleado", "administrador"] },
-      { label: "Inventario", path: "/inventario", icon: IconHome, roles: ["empleado", "administrador"], badge: "12" },
-      { label: "Ventas", path: "/ventas", icon: IconDollar, roles: ["empleado", "administrador"] },
-      { label: "Clientes", path: "/clientes", icon: IconUsers, roles: ["empleado", "administrador"] },
+      { label: "Dashboard", path: "/dashboard", icon: IconGrid, roles: ["empleado", "administrador"] },
+      { label: "Inventario", path: "/inventory", icon: IconHome, roles: ["empleado", "administrador"], badge: "12" },
+      { label: "Ventas", path: "/sales", icon: IconDollar, roles: ["empleado", "administrador"] },
+      { label: "Clientes", path: "/customers", icon: IconUsers, roles: ["empleado", "administrador"] },
     ],
   },
   {
     section: "Gestión",
     items: [
-      { label: "Proveedores", path: "/proveedores", icon: IconTruck, roles: ["empleado", "administrador"] },
-      { label: "Reportes", path: "/reportes", icon: IconChart, roles: ["administrador"] },
+      { label: "Proveedores", path: "/suppliers", icon: IconTruck, roles: ["empleado", "administrador"] },
+      { label: "Reportes", path: "/reports", icon: IconChart, roles: ["administrador"] },
     ],
   },
   {
     section: "Administración",
     items: [
-      { label: "Empleados", path: "/empleados", icon: IconUser, roles: ["administrador"] },
+      { label: "Empleados", path: "/employees", icon: IconUser, roles: ["administrador"] },
     ],
   },
 ];

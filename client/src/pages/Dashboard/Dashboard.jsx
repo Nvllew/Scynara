@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
-import Sidebar from "../components/dashboard/Sidebar/Sidebar";
-import StatCards from "../components/dashboard/StatCards/StatCards";
-import ModuleCards from "../components/dashboard/ModuleCards/ModuleCards";
-import RecentSales from "../components/dashboard/RecentSales/RecentSales";
-import AlertsPanel from "../components/dashboard/AlertsPanel/AlertsPanel";
-import SettingsModal from "../components/dashboard/SettingsModal/SettingsModal";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import StatCards from "../../components/dashboard/StatCards/StatCards";
+import ModuleCards from "../../components/dashboard/ModuleCards/ModuleCards";
+import RecentSales from "../../components/dashboard/RecentSales/RecentSales";
+import AlertsPanel from "../../components/dashboard/AlertsPanel/AlertsPanel";
+import SettingsModal from "../../components/dashboard/SettingsModal/SettingsModal";
 
-import "../components/dashboard/Dashboard.css";
+import "./Dashboard.css";
 
 /* ───────────── ICONOS ───────────── */
 const IconBell = () => (
