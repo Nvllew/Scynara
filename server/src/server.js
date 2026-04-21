@@ -1,15 +1,14 @@
-import app from './app.js';
-import { pool } from './config/db.js';
-import { env } from './config/env.js';
+ import app from './app.js';
+import pool from './config/db.js';
 
 const startServer = async () => {
   try {
-    const [rows] = await pool.query("SELECT 1");
+    const [rows] = await pool.query("SELECT 1"); 
 
     console.log("Conectado a MySQL correctamente");
 
-    app.listen(env.PORT, () => {
-      console.log(`Servidor corriendo en http://localhost:${env.PORT}`);
+    app.listen(process.env.PORT || 3000, () => {
+      console.log(`Servidor corriendo en http://localhost:${process.env.PORT || 3000}`);
     });
 
   } catch (error) {
