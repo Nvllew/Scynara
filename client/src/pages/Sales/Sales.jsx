@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Sidebar from "../../components/sidebar/Sidebar";
 import SalesTopbar from "../../components/sales/SalesTopbar";
 import SalesStats from "../../components/sales/SalesStats";
 import SalesToolbar from "../../components/sales/SalesToolbar";

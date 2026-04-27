@@ -1,5 +1,5 @@
-import NotFoundIllustration from "../../components/NotFound/NotFoundIllustration";
-import NotFoundActions from "../../components/NotFound/NotFoundActions";
+import NotFoundIllustration from "../../components/notfound/NotFoundIllustration";
+import NotFoundActions from "../../components/notfound/NotFoundActions";
 import "./NotFound.css";
 
 export default function NotFound() {

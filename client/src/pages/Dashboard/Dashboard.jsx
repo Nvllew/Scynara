@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Sidebar from "../../components/sidebar/Sidebar";
 import StatCards from "../../components/dashboard/StatCards/StatCards";
 import ModuleCards from "../../components/dashboard/ModuleCards/ModuleCards";
 import RecentSales from "../../components/dashboard/RecentSales/RecentSales";
